@@ -2,9 +2,8 @@ name: Supabase Keep Alive
 
 on:
   schedule:
-    # Berjalan otomatis setiap 3 hari sekali jam 00:00 UTC
     - cron: '0 0 */3 * *'
-  workflow_dispatch: # Mengaktifkan tombol untuk test manual kapan saja
+  workflow_dispatch:
 
 jobs:
   ping_supabase:
@@ -12,9 +11,8 @@ jobs:
     steps:
       - name: Hit Supabase API
         run: |
-          curl -X POST "https://emxqtcjlpvcblsffzaa.supabase.co/rest/v1/supabase_keep_alive" \
+          curl -i -X POST "https://emxqtcjlpvcblsffzaa.supabase.co/rest/v1/supabase_keep_alive" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Content-Type: application/json" \
-          -H "Prefer: resolution=merge-duplicates" \
-          -d '{"id": 1}'
+          -d '{}'
